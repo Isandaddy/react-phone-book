@@ -18,7 +18,7 @@ class PhoneForm extends Component {
     handleSubmit = (e) => {
         //페이지 리로딩 방지
         e.preventDefault();
-        // 상태값을 onCreate 를 통하여 부모에게 전달
+        // 상태값을 onCreate 를 통하여 부모(App.js)에게 전달
         this.props.onCreate(this.state);
         this.setState({
             name: '',
