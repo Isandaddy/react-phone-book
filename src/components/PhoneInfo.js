@@ -37,8 +37,7 @@ class PhoneInfo extends Component {
   //input에서 사용자 입력값이 들어왔을때 감지하는 함수
   handleChange = e => {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
+
     this.setState({
       //여기 다시!!!!
       [name]: value

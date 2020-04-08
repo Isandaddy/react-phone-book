@@ -18,8 +18,17 @@ class App extends Component {
         name: "홍길동",
         phone: "010-0000-0001"
       }
-    ]
+    ],
+    keyword: ""
   };
+
+  //input에서 감지한 값을 keyword에 넣어줌
+  handleChange = e => {
+    this.setState({
+      keyword: e.target.value
+    });
+  };
+
   //자식 클래스(PhoneForm)에서 onCreate의 속성명의 props로 넘기고... handleSubmit()로 인자값 전달 받는다
   handleCreate = data => {
     const { information } = this.state;
@@ -48,12 +57,20 @@ class App extends Component {
   };
 
   render() {
-    const { information } = this.state;
+    const { information, keyword } = this.state;
     return (
       <div>
         <PhoneForm onCreate={this.handleCreate} />
         {/*JSON.stringify( )는 자바스크립트의 값을 JSON 문자열로 변환한다.*/}
         {/*JSON.stringify(information)*/}
+        <p>
+          <input
+            placeholder="검색 할 이름을 입력하세요.."
+            value={keyword}
+            onChange={this.handleChange}
+          />
+        </p>
+        <hr />
         <PhoneInfoList
           data={information}
           onRemove={this.handleRemove}
