@@ -35,6 +35,18 @@ class App extends Component {
     });
   };
 
+  handleUpdate = (id, data) => {
+    const { information } = this.state;
+    this.setState({
+      information: information.map(
+        info =>
+          id === info.id
+            ? { ...info, ...data } // 새 객체를 만들어서 기존의 값과 전달받은 data 을 덮어씀
+            : info // 기존의 값을 그대로 유지
+      )
+    });
+  };
+
   render() {
     const { information } = this.state;
     return (
@@ -42,7 +54,11 @@ class App extends Component {
         <PhoneForm onCreate={this.handleCreate} />
         {/*JSON.stringify( )는 자바스크립트의 값을 JSON 문자열로 변환한다.*/}
         {/*JSON.stringify(information)*/}
-        <PhoneInfoList data={information} onRemove={this.handleRemove} />
+        <PhoneInfoList
+          data={information}
+          onRemove={this.handleRemove}
+          onUpdate={this.handleUpdate}
+        />
       </div>
     );
   }
