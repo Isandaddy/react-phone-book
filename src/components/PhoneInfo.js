@@ -48,8 +48,8 @@ class PhoneInfo extends Component {
   //이 시점에선 this.props 와 this.state 가 바뀌어있습니다.
   //그리고 파라미터를 통해 이전의 값인 prevProps 와 prevState 를 조회 할 수 있습니다.
   componentDidUpdate(preProps, preState) {
-    console.log(preState);
-    console.log(this.state.editing);
+    //console.log(preState);
+    //console.log(this.state.editing);
     //state의 editing값이 바뀔때 처리 로직
     //Update눌렀을때 기존값이 input에 나타나고
     //input값들을 부모에게 전달
@@ -71,6 +71,19 @@ class PhoneInfo extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    // 수정 상태가 아니고, info 값이 같다면 리렌더링 안함
+    if (
+      !this.state.editing &&
+      !nextState.editing &&
+      nextProps.info === this.props.info
+    ) {
+      return false;
+    }
+    // 나머지 경우엔 리렌더링함
+    return true;
+  }
+
   handleUpdate = () => {
     const { info, onUpdate } = this.props;
 
@@ -82,6 +95,7 @@ class PhoneInfo extends Component {
   };
 
   render() {
+    console.log("render PhoneInfo " + this.props.info.id);
     const style = {
       border: "1px solid black",
       padding: "8px",

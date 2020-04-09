@@ -58,6 +58,11 @@ class App extends Component {
 
   render() {
     const { information, keyword } = this.state;
+    //information객체를 filter로 순회 하면서 각 객체의 name값을 검색어에서 찾아서 있으면 새로운
+    //객체로 만들고 filteredList에 대입
+    const filteredList = information.filter(
+      info => info.name.indexOf(keyword) !== -1
+    );
     return (
       <div>
         <PhoneForm onCreate={this.handleCreate} />
@@ -72,7 +77,8 @@ class App extends Component {
         </p>
         <hr />
         <PhoneInfoList
-          data={information}
+          //필터링된 데이터가 들어감
+          data={filteredList}
           onRemove={this.handleRemove}
           onUpdate={this.handleUpdate}
         />
